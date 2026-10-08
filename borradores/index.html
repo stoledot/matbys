@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Taller de Lógica Matemática y Conjuntos. Un reto de 8 sesiones para comenzar a entender matemáticas mediante la formalización.">
+  <title>Taller de Lógica Matemática y Conjuntos</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #e62b2f;
+      --red-dark: #b91920;
+      --cream: #fff8f1;
+      --ink: #171313;
+      --muted: #6f6464;
+      --line: #eadede;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    .navbar {
+      background: rgba(255,248,241,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .hero {
+          min-height: 760px;
+          padding-top: 85px;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          position: relative;
+          background:
+            radial-gradient(circle at 85% 20%, rgba(255,255,255,.13), transparent 25%),
+            var(--red);
+          color: white;
+        }
+
+    .hero:before,
+    .hero:after {
+      content: "";
+      position: absolute;
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(6rem, 15vw, 13rem);
+      opacity: .075;
+      pointer-events: none;
+    }
+
+    .hero:before { content: "∧ ⇒ ∴"; right: -1rem; top: 2rem; }
+    .hero:after { content: "A ∩ (B ∪ C)"; left: -2rem; bottom: -3rem; }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem .8rem;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6.2rem);
+      line-height: .95;
+      letter-spacing: -.055em;
+      text-shadow: 0 8px 25px rgba(0,0,0,.16);
+    }
+
+    .hero-lead {
+      max-width: 680px;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      line-height: 1.65;
+      color: rgba(255,255,255,.92);
+    }
+
+    .formula {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      opacity: .95;
+      margin-bottom: 1rem;
+    }
+
+    .btn-main {
+      background: white;
+      color: var(--red-dark);
+      border: 0;
+      border-radius: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn-main:hover {
+      color: var(--red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 35px rgba(0,0,0,.23);
+    }
+
+    .hero-cover {
+      width: min(100%, 440px);
+      border-radius: 18px;
+      box-shadow: 0 28px 65px rgba(0,0,0,.3);
+      transform: rotate(8deg);
+    }
+
+    .section { padding: 90px 0; }
+    .section-tight { padding: 65px 0; }
+
+    .section-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      letter-spacing: -.045em;
+      line-height: 1;
+    }
+
+    .intro {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .feature-card {
+      height: 100%;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.6rem;
+      box-shadow: 0 8px 25px rgba(40,20,20,.04);
+    }
+
+    .feature-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #fde0e0;
+      color: var(--red-dark);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: .55rem;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .challenge {
+      background: var(--ink);
+      color: white;
+      border-radius: 28px;
+      padding: clamp(2rem, 5vw, 4.5rem);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .challenge:after {
+      content: "p → q";
+      position: absolute;
+      right: -1rem;
+      bottom: -2rem;
+      font: italic clamp(6rem, 14vw, 12rem)/1 Georgia, serif;
+      opacity: .06;
+    }
+
+    .challenge p { color: #d8cccc; line-height: 1.75; }
+    .challenge strong { color: white; }
+
+    .steps .step {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-number {
+      flex: 0 0 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--red);
+      color: white;
+      font-weight: 800;
+    }
+
+    .price-box {
+      background: var(--red);
+      color: white;
+      border-radius: 25px;
+      padding: clamp(2rem, 5vw, 3.5rem);
+      box-shadow: 0 18px 50px rgba(230,43,47,.25);
+    }
+
+    .price {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(4rem, 9vw, 6.5rem);
+      line-height: .9;
+      font-weight: 800;
+    }
+
+    .price-note { color: rgba(255,255,255,.8); }
+
+    .topic {
+      border: 1px solid var(--line);
+      background: white;
+      color: black;
+      border-radius: 12px;
+      padding: .8rem 1rem;
+      font-weight: 600;
+    }
+
+    .topic:before {
+      content: "✓";
+      color: var(--red);
+      font-weight: 900;
+      margin-right: .55rem;
+    }
+
+    .faq .accordion-item {
+      border: 1px solid var(--line);
+      border-radius: 12px !important;
+      overflow: hidden;
+      margin-bottom: .75rem;
+      background: white;
+    }
+
+    .faq .accordion-button {
+      font-weight: 700;
+      background: white;
+      box-shadow: none;
+    }
+
+    .faq .accordion-button:not(.collapsed) {
+      color: var(--red-dark);
+      background: #fff7f7;
+    }
+
+    .final-cta {
+      background: var(--ink);
+      color: white;
+      padding: 80px 0;
+    }
+
+    .small-muted { color: var(--muted); font-size: .9rem; }
+
+    footer {
+      background: #100e0e;
+      color: #aaa;
+      padding: 25px 0;
+      font-size: .85rem;
+    }
+
+    @media (max-width: 991px) {
+      .hero { min-height: auto; padding: 110px 0 75px; }
+      .hero-cover { margin-top: 2.5rem; max-width: 360px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container py-2">
+    <a class="navbar-brand brand" href="#">Lógica y Conjuntos</a>
+    <a class="btn btn-sm btn-danger fw-bold px-3 hotmart-enlace" href="#">INSCRIBIRME</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-content">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="formula">p ∧ q &nbsp;&nbsp; p ⇒ q</div>
+        <span class="eyebrow mb-4">Taller · 8 sesiones</span>
+
+        <h1 class="my-4">TALLER DE<br>LÓGICA MATEMÁTICA<br>Y CONJUNTOS</h1>
+
+        <p class="hero-lead mb-4">
+          Un taller para comenzar a <strong>entender las matemáticas</strong> a través de una
+          introducción formal a la lógica, las demostraciones y los conjuntos.
+        </p>
+
+        <div class="d-flex flex-wrap align-items-center gap-3">
+          <a class="btn btn-main btn-lg hotmart-enlace" href="#">
+            INSCRIBIRME — $65 USD
+          </a>
+          
+
+        </div>
+      </div>
+
+      <div class="col-lg-5 text-center">
+        <img
+          class="hero-cover"
+          alt="Portada del Curso de Lógica Matemática y Conjuntos"
+          src="main.png">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTADOR DE INICIO 
+<section class="py-5" id="contador-inicio">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 text-center">
+
+                <span class="badge rounded-pill px-3 py-2 mb-3"
+                      style="background-color: #e8f7f5; color: #008f87;">
+                    🚀 PRÓXIMO INICIO
+                </span>
+
+                <h2 class="fw-bold mb-3">
+                    El reto comienza el <span style="color: #008f87;">29 de septiembre</span>
+                </h2>
+
+                <p class="lead mb-4">
+                    Inscríbete antes de esa fecha y prepárate para comenzar.
+                </p>
+
+                <!-- CONTADOR 0
+                <div class="row justify-content-center g-3 mb-4">
+
+                    <div class="col-6 col-md-3">
+                        <div class="p-3 rounded-4 shadow-sm bg-white">
+                            <div id="dias" class="display-5 fw-bold" style="color:#008f87;">
+                                00
+                            </div>
+                            <small class="text-muted">DÍAS</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <div class="p-3 rounded-4 shadow-sm bg-white">
+                            <div id="horas" class="display-5 fw-bold" style="color:#008f87;">
+                                00
+                            </div>
+                            <small class="text-muted">HORAS</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <div class="p-3 rounded-4 shadow-sm bg-white">
+                            <div id="minutos" class="display-5 fw-bold" style="color:#008f87;">
+                                00
+                            </div>
+                            <small class="text-muted">MINUTOS</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <div class="p-3 rounded-4 shadow-sm bg-white">
+                            <div id="segundos" class="display-5 fw-bold" style="color:#008f87;">
+                                00
+                            </div>
+                            <small class="text-muted">SEGUNDOS</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="text-muted mb-4">
+                    ⏳ ¡No esperes hasta el último momento!
+                </p>
+
+                <a href="https://pay.hotmart.com/N107579460T"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn btn-lg px-5 py-3 rounded-pill fw-bold"
+                   style="background-color:#008f87; color:white;">
+                    INSCRIBIRME
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>-->
+
+<!-- SCRIPT DEL CONTADOR -->
+<script>
+    // Fecha de inicio: 29 de septiembre de 2026
+    const fechaInicio = new Date("2026-09-29T00:00:00-06:00").getTime();
+
+    const contador = setInterval(function () {
+
+        const ahora = new Date().getTime();
+        const diferencia = fechaInicio - ahora;
+
+        if (diferencia <= 0) {
+            clearInterval(contador);
+
+            document.getElementById("dias").textContent = "00";
+            document.getElementById("horas").textContent = "00";
+            document.getElementById("minutos").textContent = "00";
+            document.getElementById("segundos").textContent = "00";
+
+            return;
+        }
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor(
+            (diferencia % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+        const minutos = Math.floor(
+            (diferencia % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+        const segundos = Math.floor(
+            (diferencia % (1000 * 60)) /
+            1000
+        );
+
+        document.getElementById("dias").textContent =
+            String(dias).padStart(2, "0");
+
+        document.getElementById("horas").textContent =
+            String(horas).padStart(2, "0");
+
+        document.getElementById("minutos").textContent =
+            String(minutos).padStart(2, "0");
+
+        document.getElementById("segundos").textContent =
+            String(segundos).padStart(2, "0");
+
+    }, 1000);
+</script>
+
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <span class="text-danger fw-bold text-uppercase small">¿Qué es este taller?</span>
+        <h2 class="section-title mt-2 mb-4">No entenderás las matemáticas si no sabes esto.</h2>
+        <p class="intro">
+            Para poder entender las verdaderas matemáticas, necesitas aprender esto. Reglas de decucción, proposiciones, demostraciones y conjuntos.
+         
+        </p>
+      </div>
+    </div>
+
+    <!--
+    <div class="challenge mt-5">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <h2 class="serif display-5 mb-3">¿Por qué es un reto?</h2>
+          <p>
+            Durante <strong>4 semanas</strong> tendrás un nuevo desafío matemático
+            cada martes y jueves. Las sesiones se irán desbloqueando progresivamente
+            para que avances paso a paso.
+          </p>
+          <p class="mb-0">
+            Se te pedirán ejercicios. No necesitas limitarte a mirar el contenido:
+            la idea es <strong>pensar, resolver, escribir y justificar</strong>.
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <div class="row g-2">
+            <div class="col-6"><div class="topic">8 sesiones cortas </div></div>
+            <div class="col-6"><div class="topic">4 semanas</div></div>
+            <div class="col-6"><div class="topic">Martes y jueves</div></div>
+            <div class="col-6"><div class="topic">A tu ritmo</div></div>
+          </div>
+        </div>
+      </div>-->
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: LO QUE NECESITAS -->
+<section class="section-tight">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8">
+        <span class="text-danger fw-bold text-uppercase small">
+          Sin complicaciones
+        </span>
+
+        <h2 class="section-title mt-2 mb-3">
+          Lo que necesitas
+        </h2>
+
+        <p class="intro">
+          No necesitas equipo especial ni conocimientos técnicos.
+          Solo prepara lo básico y concéntrate en el reto.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Dispositivo -->
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon mx-auto">⌁</div>
+          <h3>Un dispositivo</h3>
+          <p>
+            Celular, tableta, computadora o cualquier dispositivo
+            con el que puedas acceder a la plataforma.
+          </p>
+        </div>
+      </div>
+
+      <!-- Libreta -->
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon mx-auto">▤</div>
+          <h3>Una libreta</h3>
+          <p>
+            Una libreta de apuntes para escribir ideas, resolver
+            ejercicios y construir tus propios razonamientos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Bolígrafo -->
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon mx-auto">✎</div>
+          <h3>Un bolígrafo</h3>
+          <p>
+            Porque las matemáticas no solo se leen:
+            también se escriben, se prueban y se justifican.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+      <p class="serif fs-4 mb-0">
+        <em>Eso es todo. Ahora toca pensar.</em>
+      </p>
+    </div>
+  </div>
+</section>
+<!-- FIN SECCIÓN: LO QUE NECESITAS -->
+
+<section class="section-tight bg-white">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <span class="text-danger fw-bold text-uppercase small">El enfoque</span>
+        <h2 class="section-title mt-2">Formalizar para pensar.</h2>
+      </div>
+      <div class="col-lg-8">
+        <p class="intro mb-4">
+          Empezaremos desde conceptos fundamentales y construiremos poco a poco
+          el lenguaje necesario para comenzar a realizar razonamientos matemáticos
+          formales.
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6"><div class="feature-card"><div class="feature-icon">∧</div><h3>Lógica</h3><p>Proposiciones, conectores lógicos y formas básicas de razonamiento.</p></div></div>
+          <div class="col-md-6"><div class="feature-card"><div class="feature-icon">⇒</div><h3>Deducción</h3><p>Aprende a pasar de unas afirmaciones a otras mediante reglas de inferencia.</p></div></div>
+          <div class="col-md-6"><div class="feature-card"><div class="feature-icon">∎</div><h3>Demostraciones</h3><p>Una introducción a axiomas, teoremas y demostraciones matemáticas simples.</p></div></div>
+          <div class="col-md-6"><div class="feature-card"><div class="feature-icon">∪</div><h3>Conjuntos</h3><p>Conjuntos y operaciones como unión, intersección y otras relaciones básicas.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <span class="text-danger fw-bold text-uppercase small">Lo que vas a trabajar</span>
+        <h2 class="section-title mt-2">El lenguaje detrás de las matemáticas.</h2>
+        <p class="intro mt-3">
+          El curso está diseñado para darte una primera experiencia con la
+          formalización matemática, sin asumir que ya eres experto en demostraciones.
+        </p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-md-6"><div class="topic">Proposiciones</div></div>
+          <div class="col-md-6"><div class="topic">Conectores lógicos</div></div>
+          <div class="col-md-6"><div class="topic">Axiomas</div></div>
+          <div class="col-md-6"><div class="topic">Deducción</div></div>
+          <div class="col-md-6"><div class="topic">Demostraciones</div></div>
+          <div class="col-md-6"><div class="topic">Conjuntos</div></div>
+          <div class="col-md-6"><div class="topic">Operaciones con conjuntos</div></div>
+          <div class="col-md-6"><div class="topic">Teoremas y definiciones</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight bg-white">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="text-danger fw-bold text-uppercase small">Así funciona</span>
+        <h2 class="section-title mt-2 mb-4">Avanza una sesión a la vez.</h2>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div><strong>Te inscribes</strong><br><span class="small-muted">Accedes a la plataforma del curso.</span></div>
+          </div>
+          <!--
+          <div class="step">
+            <div class="step-number">2</div>
+            <div><strong>Martes y jueves se desbloquea una sesión</strong><br><span class="small-muted">El contenido aparece progresivamente durante las cuatro semanas. Puedes verlas en cualquier momento.</span></div>
+          </div>-->
+          <div class="step">
+            <div class="step-number">2</div>
+            <div><strong>Ves la clase</strong><br><span class="small-muted">Tendrás acceso a clases cortas y concisas.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div><strong>Lees el material</strong><br><span class="small-muted">Descargas el material del curso y lo lees para asimilar el aprendizaje.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div><strong>Resuelves los ejercicios</strong><br><span class="small-muted">La práctica es parte fundamental del reto.</span></div>
+          </div>
+          <!--
+          <div class="step">
+            <div class="step-number">4</div>
+            <div><strong>Comparte tus dudas</strong><br><span class="small-muted">Tendrás un foro y retroalimentación ligera del profesor.</span></div>
+          </div>
+          -->
+        </div>
+      </div>
+
+      <div class="col-lg-5 offset-lg-1">
+        <div class="price-box">
+          <div class="small text-uppercase fw-bold mb-2">Inscripción</div>
+          <div class="price">$65</div>
+          <div class="fs-5 mb-3">USD · pago único</div>
+          <p class="price-note">Incluye las 8 sesiones del reto y todos los recursos indicados.</p>
+          <a href="#" class="hotmart-enlace btn btn-light btn-lg w-100 fw-bold py-3 mt-2">
+            INSCRIBIRME
+          </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8">
+        <span class="text-danger fw-bold text-uppercase small">Tu inscripción incluye</span>
+        <h2 class="section-title mt-2">Todo lo necesario para hacer el reto.</h2>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon">8</div>
+          <h3>8 sesiones cortas y no abrumadoras</h3>
+          <p>Un recorrido de ocho sesiones. Puedes verlas cuando quieras.</p>
+        </div>
+      </div>
+      <!--
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon">?</div>
+          <h3>Foro de dudas</h3>
+          <p>Un espacio para comentar tus preguntas y recibir retroalimentación ligera del profesor.</p>
+        </div>
+      </div>
+      -->
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon">↓</div>
+          <h3>Material descargable</h3>
+          <p>Notas de estudio para que puedas repasar y trabajar por tu cuenta.</p>
+        </div>
+      </div>
+      <!--
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon">▶</div>
+          <h3>Sesión de presentación</h3>
+          <p>Una sesión en vivo <strong>con Brillinury y Samuel</strong> para presentar el curso y explicar cómo participar en el reto.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon">★</div>
+          <h3>Sesión de conclusión</h3>
+          <p>Una sesión en vivo <strong>con Brillinury y Samuel</strong> para cerrar el reto y mencionar a los mejores estudiantes.</p>
+        </div>
+      </div>
+      -->
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card">
+          <div class="feature-icon">✓</div>
+          <h3>Constancia</h3>
+          <p>Constancia de conclusión del curso, <strong>sin valor curricular</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight bg-white">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 text-center">
+        <span class="text-danger fw-bold text-uppercase small">¿Es para ti?</span>
+        <h2 class="section-title mt-2 mb-4">Si quieres empezar a entender las matemáticas, sí.</h2>
+        <p class="intro">
+          Este taller puede ser un buen punto de partida si te interesa entender
+          cómo se construyen y justifican las matemáticas, si quieres acercarte
+          a las demostraciones o simplemente quieres dejar de ver las matemáticas
+          como una colección de fórmulas.
+        </p>
+        <a href="#" class="hotmart-enlace btn btn-danger btn-lg fw-bold px-5 py-3 mt-3">
+          QUIERO INSCRIBIRME AL TALLER
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <span class="text-danger fw-bold text-uppercase small"></span>
+        <h2 class="section-title mt-2 mb-4">Preguntas frecuentes</h2>
+
+        <div class="accordion" id="faq">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#f1">
+                ¿Cuánto dura el taller?
+              </button>
+            </h3>
+            <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faq">
+              <div class="accordion-body">Son 8 sesiones.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">
+                ¿Las sesiones están disponibles todas desde el principio?
+              </button>
+            </h3>
+            <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq">
+              <div class="accordion-body">Sí. Todas las clases estarás disponibles desde el principio. Es recomendable ir en el orden establecido para que entiendas todo.</div>
+            </div>
+          </div>
+
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3">
+                ¿Tengo que hacer ejercicios?
+              </button>
+            </h3>
+            <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faq">
+              <div class="accordion-body">Sí. Los ejercicios forman parte del reto y están pensados para que pongas en práctica lo aprendido.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4">
+                ¿Tiene valor curricular la constancia?
+              </button>
+            </h3>
+            <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faq">
+              <div class="accordion-body">No. La constancia acredita la conclusión del curso, pero se entrega expresamente sin valor curricular.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f5">
+                ¿Cuánto cuesta?
+              </button>
+            </h3>
+            <div id="f5" class="accordion-collapse collapse" data-bs-parent="#faq">
+              <div class="accordion-body">El precio es de $65 USD.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="container text-center">
+    <div class="formula">p → q &nbsp;&nbsp; A ∩ B</div>
+    <h2 class="display-4 serif fw-bold">Tu forma de comprender también se entrena.</h2>
+    <p class="lead text-white-50 mx-auto my-4" style="max-width:650px;">
+      Ocho sesiones. Un taller para comenzar a mirar las matemáticas desde su estructura.
+    </p>
+    <a href="#" class="hotmart-enlace btn btn-light btn-lg fw-bold px-5 py-3">
+      INSCRIBIRME POR $65 USD
+    </a>
+    
+  </div>
+</section>
+
+<footer>
+  <div class="container text-center">
+    Taller de Lógica Matemática y Conjuntos · Constancia de conclusión sin valor curricular.
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const hotmartenlace = "https://go.hotmart.com/N107579460T?dp=1";
+</script>
+
+<script>
+    document.querySelectorAll(".hotmart-enlace").forEach(a => {
+        a.href = hotmartenlace;
+    });
+</script>
+
+
+</body>
+</html>

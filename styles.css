@@ -1,0 +1,200 @@
+
+/* =========================================================
+    VARIABLES — CAMBIA AQUÍ LA APARIENCIA COMPLETA DEL SITIO
+    ========================================================= */
+
+:root {
+
+    /* Colores */
+    --color-primary: #7c3aed;
+    --color-primary-hover: #6d28d9;
+
+    --color-secondary: #f5f3ff;
+
+    --color-background: #ffffff;
+    --color-background-soft: #fafafa;
+
+    --color-card: #ffffff;
+
+    --color-text: #222222;
+    --color-text-soft: #666666;
+
+    --color-border: #e9e9e9;
+
+    --color-footer: #171717;
+    --color-footer-text: #ffffff;
+
+
+    /* Tipografías */
+    --font-body: 'Montserrat', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+
+
+    /* Otros */
+    --card-radius: 18px;
+    --button-radius: 10px;
+    --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+    ESTILOS GENERALES
+    ========================================================= */
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-background-soft);
+    color: var(--color-text);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-heading);
+}
+
+
+/* =========================================================
+    HERO / TÍTULO
+    ========================================================= */
+
+.hero {
+    padding: 90px 20px 70px;
+    background-color: var(--color-background);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(2.3rem, 6vw, 4.5rem);
+    font-weight: 700;
+    margin-bottom: 0;
+    color: var(--color-text);
+}
+
+
+/* =========================================================
+    CATÁLOGO
+    ========================================================= */
+
+.catalogo {
+    padding: 70px 0 100px;
+}
+
+
+/* =========================================================
+    CARD
+    ========================================================= */
+
+.product-card {
+    height: 100%;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.11);
+}
+
+
+/* Imagen cuadrada */
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* Contenido */
+
+.product-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 100%);
+}
+
+.product-title {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.product-description {
+    color: var(--color-text-soft);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+    BOTÓN
+    ========================================================= */
+
+.btn-product {
+    margin-top: auto;
+
+    background-color: var(--color-primary);
+    border: none;
+    color: white;
+
+    border-radius: var(--button-radius);
+
+    padding: 12px 20px;
+
+    font-family: var(--font-body);
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-product:hover {
+    background-color: var(--color-primary-hover);
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+    FOOTER
+    ========================================================= */
+
+footer {
+    background-color: var(--color-footer);
+    color: var(--color-footer-text);
+    padding: 30px 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+    RESPONSIVE
+    ========================================================= */
+
+@media (max-width: 767px) {
+
+    .hero {
+        padding: 65px 20px 50px;
+    }
+
+    .catalogo {
+        padding: 45px 15px 70px;
+    }
+
+}
