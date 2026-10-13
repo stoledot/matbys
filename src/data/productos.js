@@ -13,14 +13,14 @@ const productos = [
   },
   {
     id: "curso-logica",
-    nombre: "Curso de Lógica Matemática y Conjuntos",
+    nombre: "Curso 00 - Matemáticas puras",
     categoria: "Cursos",
     precio: "$85 USD + IVA",
     descripcion:
-      "Aprende los fundamentos de las matemátcas mediante conceptos claros, ejercicios y demostraciones.",
-    imagen: "/images/taller-logica-conjuntos.png",
+      "Aprende los fundamentos de las matemátcas puras mediante conceptos claros, ejercicios y demostraciones.",
+    imagen: "/images/curso00-mate-puras.png",
     destacado: true,
-    url:"https://go.hotmart.com/N107579460T"
+    url:"https://go.hotmart.com/N107579460T?dp=1"
   }
 ];
 
