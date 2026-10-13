@@ -1,0 +1,22 @@
+﻿
+---
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const {
+  title = "Catálogo | Mate Brillinury y Samuel",
+  description = "Cursos, retos, talleres y más."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
