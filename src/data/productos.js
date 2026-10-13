@@ -2,7 +2,7 @@
 const productos = [
   {
     id: "curso-algebra",
-    nombre: "Curso de Álgebra",
+    nombre: "Curso de Álgebra Básica",
     categoria: "Cursos",
     precio: "$2500 MXN + IVA",
     descripcion:
