@@ -17,7 +17,7 @@ const productos = [
     categoria: "Cursos",
     precio: "$85 USD + IVA",
     descripcion:
-      "Aprende los fundamentos de las matemátcas puras mediante conceptos claros, ejercicios y demostraciones.",
+      "Empieza desde cero a aprender los fundamentos de las matemátcas puras mediante conceptos claros, ejercicios y demostraciones.",
     imagen: "/images/curso00-mate-puras.png",
     destacado: true,
     url:"https://go.hotmart.com/N107579460T?dp=1"
