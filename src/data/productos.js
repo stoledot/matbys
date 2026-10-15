@@ -12,6 +12,7 @@ const productos = [
     destacado: true,
     url:"https://go.hotmart.com/N107579460T?dp=1"
   },
+  /*
   {
     id: "libro-matematicas-puras-00",
     nombre: "Libro Matemáticas Puras 00",
@@ -22,7 +23,7 @@ const productos = [
     imagen: "/images/libro-matepuras00.png",
     destacado: true,
     url: "https://go.hotmart.com/R108040050S?dp=1"
-  },
+  },*/
   {
     id: "curso-algebra",
     nombre: "Curso de Álgebra Básica",
